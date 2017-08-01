@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Clientes</title>
+        <style>
+            *{
+                margin:0px;
+                padding:0px
+            }
+
+            body{
+                background: #424242;
+                text-align: center;
+            }
+
+            div, figure, header, nav, section{
+                display: block
+            }
+
+            h1{
+                display: inline;
+                font-size: 30px;
+            }
+
+            #close{
+                clear: both;
+            }
+
+            #main_box{
+                margin: 50px auto;
+                text-align: left;
+                width: 960px;
+            }
+
+            #header_box{
+                padding: 10px;
+            }
+
+            #menu_box{
+                background-color: white;
+                border-radius: 10px;
+                float: left;
+                padding: 15px;
+            }
+
+            div[id^="cliente"]{
+                clear: both;
+                cursor: pointer;
+                border: 1px solid #CCCCCC;
+                border-radius: 5px;
+                margin: 7px;
+                padding: 10px 10px 5px 10px;
+                width: 360px;
+                transition:background-color 0.4s ease-out;
+            }
+
+            figure[id^="image"]{
+                float: left;
+                padding-right: 10px;
+            }
+
+            h1[id^="name"]{
+                font-size: 22px;
+            }
+
+            h2[id^="activ"]{
+                color: #888888;
+                font-size: 17px;
+            }
+
+            div[id^="text"]{
+                float: left;
+                margin-top: 5px;
+            }
+
+            div[id^="circ"]{
+                background: #CCCCCC;
+                transition:background-color 0.4s ease-out;
+                border-radius: 50%;
+                float: right;
+                height: 30px;
+                width: 30px;
+            }
+
+            #change{
+                clear: both;
+                padding: 15px 0px 10px 35px;
+            }
+
+            div[id^="push"]{
+                border: 1px solid #CCCCCC;
+                border-radius: 5px;
+                cursor: pointer;
+                float: left;
+                font-size: 20px;
+                margin-right: 14px;
+                padding: 10px 15px;
+                transition:background-color 0.4s ease-out;
+            }
+
+            #section_box{
+                background: white;
+                border: 1px solid #CCCCCC;
+                border-radius: 0px 10px 10px 0px;
+                display: none;
+                float: left;
+                height: 544px;
+                margin-top: 30px;
+                transition:background-color 1s ease-out;
+                width: 510px;
+            }
+
+            #big_image{
+                float: left;
+                padding: 25px 20px 20px 20px;
+            }
+
+            #info_text{
+                float: left;
+                padding-top: 27px;
+            }
+
+            #info_name,#acti_name1,#acti_name2,#acti_name3{
+                font-size: 27px;
+            }
+
+            #info_activ1{
+                color: #888888;
+                font-size: 18px;
+                padding: 5px 0px 3px 0px;
+            }
+
+            #info_activ2,#info_activ3{
+                color: #888888;
+                font-size: 15px;
+            }
+
+            #info_circ{
+                background: #CCCCCC;
+                border-radius: 50%;
+                float: right;
+                height: 40px;
+                margin: 25px 22px 0px 0px;
+                transition:background-color 0.4s ease-out;
+                width: 40px;
+            }
+
+            #closing{
+                cursor: pointer;
+                float: right;
+                padding: 5px;
+            }
+
+            div[id^="item"]{
+                border-top: 1px solid #CCCCCC;
+                padding: 5px 30px 1px 20px;
+            }
+
+            div[id^="text_item"]{
+                float: left;
+                padding-left: 15px;
+            }
+
+            #fig_item{
+                float: left;
+            }
+
+            h2[id^="acti_fecha"]{
+                color: #888888;
+                font-size: 18px;
+            }
+
+            h2[id^="acti_hora"]{
+                color: #888888;
+                font-size: 18px;
+            }
+        </style>
+        <script>
+            var clientes=[
+                {id:1, nombre:'Antonia', apellido:'Bachellet'},
+                {id:2, nombre:'Diego', apellido:'Undurraga'},
+                {id:3, nombre:'Juan', apellido:'Rios'},
+                {id:4, nombre:'Cecilia', apellido:'Gonzalez'},
+                {id:5, nombre:'Catalina', apellido:'Goic'},
+                {id:6, nombre:'Maria Luisa', apellido:'Vicuña'},
+                {id:7, nombre:'Jose', apellido:'Allende'},
+                {id:8, nombre:'Vicente', apellido:'Mackenna'},
+                {id:9, nombre:'Francisca', apellido:'Sanchez'},
+                {id:10, nombre:'Mauricio', apellido:'Arce'},
+                {id:11, nombre:'Pilar', apellido:'Fernandez'},
+                {id:12, nombre:'Magdalena', apellido:'Lagos'},
+                {id:13, nombre:'Rodolfo', apellido:'Donoso'},
+                {id:14, nombre:'Cristian', apellido:'Vidal'},
+                {id:15, nombre:'Francisco', apellido:'Perez'},
+                {id:16, nombre:'Marco', apellido:'Piñera'},
+                {id:17, nombre:'Florencia', apellido:'Montt'},
+                {id:18, nombre:'Juan Pablo', apellido:'Osandon'},
+                {id:19, nombre:'Felipe', apellido:'Frei'},
+                {id:20, nombre:'Raul', apellido:'Montes'},
+                {id:21, nombre:'Ximena', apellido:'Abello'},
+                {id:22, nombre:'Luis', apellido:'Guiller'},
+                {id:23, nombre:'Rosario', apellido:'Canepa'},
+                {id:24, nombre:'Elena', apellido:'Salas'},
+                {id:25, nombre:'Agustin', apellido:'Villagra'},
+                {id:26, nombre:'Pedro', apellido:'Martinez'},
+                {id:27, nombre:'Macarena', apellido:'Kast'},
+                {id:28, nombre:'Soledad', apellido:'Zamorano'},
+                {id:29, nombre:'Lourdes', apellido:'Bravo'},
+                {id:30, nombre:'Isabel', apellido:'Hernandez'},
+            ];
+
+            var atenciones = [
+          		  {id:1, cliente_id:13, unix:1498892500, tipo:'REUNION'},
+          		  {id:2, cliente_id:10, unix:1499019400, tipo:'REUNION'},
+          		  {id:3, cliente_id:11, unix:1499145400, tipo:'EMAIL'},
+          		  {id:4, cliente_id:24, unix:1499189700, tipo:'REUNION'},
+          		  {id:5, cliente_id:29, unix:1499321400, tipo:'LLAMADA'},
+          		  {id:6, cliente_id:25, unix:1499439100, tipo:'LLAMADA'},
+          		  {id:7, cliente_id:7, unix:1499469400, tipo:'EMAIL'},
+          		  {id:8, cliente_id:12, unix:1499511000, tipo:'EMAIL'},
+          		  {id:9, cliente_id:8, unix:1499543400, tipo:'LLAMADA'},
+          		  {id:10, cliente_id:7, unix:1499552100, tipo:'EMAIL'},
+          		  {id:11, cliente_id:14, unix:1499665200, tipo:'EMAIL'},
+          		  {id:12, cliente_id:30, unix:1499726500, tipo:'LLAMADA'},
+          		  {id:13, cliente_id:2, unix:1499879700, tipo:'LLAMADA'},
+          		  {id:14, cliente_id:3, unix:1500008900, tipo:'EMAIL'},
+          		  {id:15, cliente_id:25, unix:1500131300, tipo:'REUNION'},
+          		  {id:16, cliente_id:16, unix:1500308800, tipo:'EMAIL'},
+          		  {id:17, cliente_id:22, unix:1500338300, tipo:'REUNION'},
+          		  {id:18, cliente_id:30, unix:1500482500, tipo:'REUNION'},
+          		  {id:19, cliente_id:26, unix:1500559400, tipo:'LLAMADA'},
+          		  {id:20, cliente_id:12, unix:1500659200, tipo:'REUNION'},
+          		  {id:21, cliente_id:21, unix:1500777000, tipo:'LLAMADA'},
+          		  {id:22, cliente_id:16, unix:1500842100, tipo:'REUNION'},
+          		  {id:23, cliente_id:14, unix:1501120200, tipo:'REUNION'},
+          		  {id:24, cliente_id:11, unix:1501227300, tipo:'EMAIL'},
+          		  {id:25, cliente_id:30, unix:1501247100, tipo:'LLAMADA'},
+          		  {id:26, cliente_id:1, unix:1501260900, tipo:'LLAMADA'},
+          		  {id:27, cliente_id:25, unix:1501395000, tipo:'LLAMADA'},
+          		  {id:28, cliente_id:27, unix:1501501600, tipo:'LLAMADA'},
+          		  {id:29, cliente_id:19, unix:1501604200, tipo:'LLAMADA'},
+          		  {id:30, cliente_id:7, unix:1501633300, tipo:'EMAIL'},
+          		  {id:31, cliente_id:24, unix:1501659300, tipo:'LLAMADA'},
+          		  {id:32, cliente_id:26, unix:1501727400, tipo:'REUNION'},
+          		  {id:33, cliente_id:4, unix:1502002500, tipo:'LLAMADA'},
+          		  {id:34, cliente_id:17, unix:1502169800, tipo:'EMAIL'},
+          		  {id:35, cliente_id:13, unix:1502319500, tipo:'EMAIL'},
+          		  {id:36, cliente_id:19, unix:1502347300, tipo:'LLAMADA'},
+          		  {id:37, cliente_id:5, unix:1502460500, tipo:'LLAMADA'},
+          		  {id:38, cliente_id:18, unix:1502471200, tipo:'EMAIL'},
+          		  {id:39, cliente_id:24, unix:1502572300, tipo:'EMAIL'},
+          		  {id:40, cliente_id:19, unix:1502577000, tipo:'REUNION'},
+          		  {id:41, cliente_id:9, unix:1502639300, tipo:'LLAMADA'},
+          		  {id:42, cliente_id:22, unix:1502698700, tipo:'EMAIL'},
+          		  {id:43, cliente_id:20, unix:1503016100, tipo:'LLAMADA'},
+          		  {id:44, cliente_id:17, unix:1503113200, tipo:'LLAMADA'},
+          		  {id:45, cliente_id:17, unix:1503449500, tipo:'REUNION'},
+          		  {id:46, cliente_id:26, unix:1503722800, tipo:'REUNION'},
+          		  {id:47, cliente_id:22, unix:1503805700, tipo:'EMAIL'},
+          		  {id:48, cliente_id:1, unix:1504069200, tipo:'LLAMADA'},
+          	];
+
+            var date = Number(String(Date.now()).slice(0,-3));
+            var actividades = [];
+            var count;
+            var cvar;
+
+            for (count=1; count<=clientes.length; count++){
+                actividades.push({id:count, cant:0, color:"#B83232", last:undefined, act:[]});
+            };
+
+            for (count=0; count<atenciones.length; count++){
+                index=atenciones[count].cliente_id-1; //22-1=21
+                if (atenciones[count].unix>=date){ // si hay una actividad para hoy o futura
+                    actividades[index].act.push([atenciones[count].unix,atenciones[count].tipo]);
+                    if (actividades[index].cant===0){
+                        actividades[index].color="#C38C31"; // cambio color a naranjo si este era rojo
+                    };
+                    actividades[index].cant=actividades[index].cant+1; // sumo una actividad
+                    if (atenciones[count].unix>date){ // si la actividad es futura
+                        if(new Date(atenciones[count].unix*1000).toString().slice(4,15)!=new Date(date*1000).toString().slice(4,15)){
+                            actividades[index].color="#8FA53A"; // cambio color a verde
+                        };
+                    };
+                }
+                else{ // unix<date
+                    actividades[index].last=atenciones[count].unix;
+                };
+            };
+
+            function clean_buttons(){
+                for (count=0; count<=5; count++){
+                    document.getElementById("push"+String(5*count)).style.background = "#FFFFFF";
+                    document.getElementById("push"+String(5*count)).style.color = "#000000";
+                };
+            };
+
+            function clean_buttons_cliente(){
+                for (count=1; count<=5; count++){
+                    document.getElementById("cliente"+String(count)).style.background = "#FFFFFF";
+                    document.getElementById("name"+String(count)).style.color = "#000000";
+                    document.getElementById("activ"+String(count)).style.color = "#888888";
+                };
+            };
+
+            function name_clientes(num){
+                for(count=1; count<=5; count++){
+                    cvar=num;
+                    document.getElementById("name"+String(count)).innerHTML = clientes[count-1+num].nombre+" "+clientes[count-1+num].apellido;
+                    document.getElementById("img"+String(count)).src = "https://api.adorable.io/avatars/60/"+String(count+num)+".png";
+                    document.getElementById("img"+String(count)).style.borderRadius = "10%";
+                    document.getElementById("circ"+String(count)).style.background = actividades[count-1+num].color;
+                    if(actividades[count-1+num].cant!=1){
+                        document.getElementById("activ"+String(count)).innerHTML = String(actividades[count-1+num].cant)+" actividades";
+                    }
+                    else{
+                        document.getElementById("activ"+String(count)).innerHTML = String(actividades[count-1+num].cant)+" actividad";
+                    };
+                };
+                clean_buttons_cliente();
+                clean_buttons();
+                document.getElementById("push"+String(num)).style.background = "#424242";
+                document.getElementById("push"+String(num)).style.color = "#FFFFFF"
+            };
+
+            function single_cliente(num){
+                document.getElementById("item1").style.display="none";
+                document.getElementById("item2").style.display="none";
+                document.getElementById("item3").style.display="none";
+                document.getElementById("big_img").src = "https://api.adorable.io/avatars/100/"+String(num+cvar+1)+".png";
+                document.getElementById("big_img").style.borderRadius = "10%";
+                document.getElementById("info_name").innerHTML = clientes[num+cvar].nombre+" "+clientes[num+cvar].apellido;
+                document.getElementById("info_circ").style.background = actividades[num+cvar].color;
+                clean_buttons_cliente();
+                document.getElementById("cliente"+String(num+1)).style.background = "#424242";
+                document.getElementById("name"+String(num+1)).style.color = "#FFFFFF";
+                document.getElementById("activ"+String(num+1)).style.color = "#C38C31";
+                if(actividades[num+cvar].cant!=1){
+                    document.getElementById("info_activ1").innerHTML = String(actividades[num+cvar].cant)+" actividades";
+                }
+                else{
+                    document.getElementById("info_activ1").innerHTML = String(actividades[num+cvar].cant)+" actividad";
+                };
+                if(actividades[num+cvar].last!=undefined){
+                    document.getElementById("info_activ2").innerHTML = "Última actividad "+new Date(actividades[num+cvar].last*1000).toString().slice(4,21);
+                }
+                else{
+                    document.getElementById("info_activ2").innerHTML = "Ninguna actividad anterior";
+                };
+                if(actividades[num+cvar].act.length>0){
+                    document.getElementById("info_activ3").innerHTML = "Proxima actividad "+new Date(actividades[num+cvar].act[0][0]*1000).toString().slice(4,21);
+                    if(actividades[num+cvar].act[0][1]=='EMAIL'){
+                        document.getElementById("icon1").src = "https://1.bp.blogspot.com/-4lKHMj3HQ2g/WX7qFH8xCFI/AAAAAAAAB-w/ngNxticm6NcdblboZW1KNWTiVr-c5yRKwCLcBGAs/s1600/002.png";
+                        document.getElementById("acti_name1").innerHTML = "Email";
+                    }
+                    else if(actividades[num+cvar].act[0][1]=='LLAMADA'){
+                        document.getElementById("icon1").src = "https://1.bp.blogspot.com/-wPt4EBHj7N8/WX7qFJQ0BXI/AAAAAAAAB-s/-3dOp62hSLU95xPY1dTmaYlh7VUx4gI_ACLcBGAs/s1600/003.png";
+                        document.getElementById("acti_name1").innerHTML = "Llamada";
+                    }
+                    else{ // actividades[num+cvar].act[0][1]=='REUNION'
+                        document.getElementById("icon1").src = "https://2.bp.blogspot.com/-2bGIj2cMOzA/WX7qFBqjCpI/AAAAAAAAB-o/3Pknj5fQPTc9knc_kieRm-0wpK-x3juEgCLcBGAs/s1600/001.png";
+                        document.getElementById("acti_name1").innerHTML = "Reunión";
+                    };
+                    document.getElementById("acti_fecha1").innerHTML = new Date(actividades[num+cvar].act[0][0]*1000).toString().slice(4,15);
+                    document.getElementById("acti_hora1").innerHTML = new Date(actividades[num+cvar].act[0][0]*1000).toString().slice(15,21)+" Hrs";
+                    document.getElementById("item1").style.display="block";
+                }
+                else{
+                    document.getElementById("info_activ3").innerHTML = "Ninguna actividad próxima";
+                };
+                if(actividades[num+cvar].act.length>1){
+                    if(actividades[num+cvar].act[1][1]=='EMAIL'){
+                        document.getElementById("icon2").src = "https://1.bp.blogspot.com/-4lKHMj3HQ2g/WX7qFH8xCFI/AAAAAAAAB-w/ngNxticm6NcdblboZW1KNWTiVr-c5yRKwCLcBGAs/s1600/002.png";
+                        document.getElementById("acti_name2").innerHTML = "Email";
+                    }
+                    else if(actividades[num+cvar].act[1][1]=='LLAMADA'){
+                        document.getElementById("icon2").src = "https://1.bp.blogspot.com/-wPt4EBHj7N8/WX7qFJQ0BXI/AAAAAAAAB-s/-3dOp62hSLU95xPY1dTmaYlh7VUx4gI_ACLcBGAs/s1600/003.png";
+                        document.getElementById("acti_name2").innerHTML = "Llamada";
+                    }
+                    else{ // actividades[num+cvar].act[2][1]=='REUNION'
+                        document.getElementById("icon2").src = "https://2.bp.blogspot.com/-2bGIj2cMOzA/WX7qFBqjCpI/AAAAAAAAB-o/3Pknj5fQPTc9knc_kieRm-0wpK-x3juEgCLcBGAs/s1600/001.png";
+                        document.getElementById("acti_name2").innerHTML = "Reunión";
+                    };
+                    document.getElementById("acti_fecha2").innerHTML = new Date(actividades[num+cvar].act[1][0]*1000).toString().slice(4,15);
+                    document.getElementById("acti_hora2").innerHTML = new Date(actividades[num+cvar].act[1][0]*1000).toString().slice(15,21)+" Hrs";
+                    document.getElementById("item2").style.display="block";
+                };
+                if(actividades[num+cvar].act.length>2){
+                    if(actividades[num+cvar].act[2][1]=='EMAIL'){
+                        document.getElementById("icon3").src = "https://1.bp.blogspot.com/-4lKHMj3HQ2g/WX7qFH8xCFI/AAAAAAAAB-w/ngNxticm6NcdblboZW1KNWTiVr-c5yRKwCLcBGAs/s1600/002.png";
+                        document.getElementById("acti_name3").innerHTML = "Email";
+                    }
+                    else if(actividades[num+cvar].act[2][1]=='LLAMADA'){
+                        document.getElementById("icon3").src = "https://1.bp.blogspot.com/-wPt4EBHj7N8/WX7qFJQ0BXI/AAAAAAAAB-s/-3dOp62hSLU95xPY1dTmaYlh7VUx4gI_ACLcBGAs/s1600/003.png";
+                        document.getElementById("acti_name3").innerHTML = "Llamada";
+                    }
+                    else{ // actividades[num+cvar].act[2][1]=='REUNION'
+                        document.getElementById("icon3").src = "https://2.bp.blogspot.com/-2bGIj2cMOzA/WX7qFBqjCpI/AAAAAAAAB-o/3Pknj5fQPTc9knc_kieRm-0wpK-x3juEgCLcBGAs/s1600/001.png";
+                        document.getElementById("acti_name3").innerHTML = "Reunión";
+                    };
+                    document.getElementById("acti_fecha3").innerHTML = new Date(actividades[num+cvar].act[2][0]*1000).toString().slice(4,15);
+                    document.getElementById("acti_hora3").innerHTML = new Date(actividades[num+cvar].act[2][0]*1000).toString().slice(15,21)+" Hrs";
+                    document.getElementById("item3").style.display="block";
+                };
+                document.getElementById("section_box").style.display="block";
+            };
+
+            function close_info(){
+                document.getElementById("section_box").style.display="none";
+            };
+
+            window.onload=function(){
+                name_clientes(0);
+            };
+        </script>
+    </head>
+    <div id="main_box">
+        <body>
+
+            <nav id="menu_box">
+                <header id="header_box">
+                    <span><h1>Clientes</h1></span>
+                </header>
+                <div id="cliente1" onclick="single_cliente(0);">
+                    <figure id="image1" onclick="single_cliente(0);">
+                        <img id="img1" src="https://api.adorable.io/avatars/60/1.png">
+                    </figure>
+                    <div id="text1" onclick="single_cliente(0);">
+                        <h1 id="name1"></h1>
+                        <h2 id="activ1"></h2>
+                    </div>
+                    <div id="circ1" onclick="single_cliente(0);"></div>
+                    <div id="close"></div>
+                </div>
+                <div id="cliente2" onclick="single_cliente(1);">
+                    <figure id="image2" onclick="single_cliente(1);">
+                        <img id="img2" src="https://api.adorable.io/avatars/60/2.png">
+                    </figure>
+                    <div id="text2" onclick="single_cliente(1);">
+                        <h1 id="name2"></h1>
+                        <h2 id="activ2"></h2>
+                    </div>
+                    <div id="circ2" onclick="single_cliente(1);"></div>
+                    <div id="close"></div>
+                </div>
+                <div id="cliente3" onclick="single_cliente(2);">
+                    <figure id="image3" onclick="single_cliente(2);">
+                        <img id="img3" src="https://api.adorable.io/avatars/60/3.png">
+                    </figure>
+                    <div id="text3" onclick="single_cliente(2);">
+                        <h1 id="name3"></h1>
+                        <h2 id="activ3"></h2>
+                    </div>
+                    <div id="circ3" onclick="single_cliente(2);"></div>
+                    <div id="close"></div>
+                </div>
+                <div id="cliente4" onclick="single_cliente(3);">
+                    <figure id="image4" onclick="single_cliente(3);">
+                        <img id="img4" src="https://api.adorable.io/avatars/60/4.png">
+                    </figure>
+                    <div id="text4" onclick="single_cliente(3);">
+                        <h1 id="name4"></h1>
+                        <h2 id="activ4"></h2>
+                    </div>
+                    <div id="circ4" onclick="single_cliente(3);"></div>
+                    <div id="close"></div>
+                </div>
+                <div id="cliente5" onclick="single_cliente(4);">
+                    <figure id="image5" onclick="single_cliente(4);">
+                        <img id="img5" src="https://api.adorable.io/avatars/60/5.png">
+                    </figure>
+                    <div id="text5" onclick="single_cliente(4);">
+                        <h1 id="name5"></h1>
+                        <h2 id="activ5"></h2>
+                    </div>
+                    <div id="circ5" onclick="single_cliente(4);"></div>
+                    <div id="close"></div>
+                </div>
+                <div id="change">
+                    <div id="push0" onclick="name_clientes(0);"><span onclick="name_clientes(0);">1</span></div>
+                    <div id="push5" onclick="name_clientes(5);"><span onclick="name_clientes(5);">2</span></div>
+                    <div id="push10" onclick="name_clientes(10);"><span onclick="name_clientes(10);">3</span></div>
+                    <div id="push15" onclick="name_clientes(15);"><span onclick="name_clientes(15);">4</span></div>
+                    <div id="push20" onclick="name_clientes(20);"><span onclick="name_clientes(20);">5</span></div>
+                    <div id="push25" onclick="name_clientes(25);"><span onclick="name_clientes(25);">6</span></div>
+                    <div id="close"></div>
+                </div>
+            </nav>
+            <section id="section_box">
+                <img id="closing" src="https://www.gannett-cdn.com/uxstatic/postcrescent/uscp-web-static-2689.0/images/sprites/icon_close.png" onclick="close_info();">
+                <div id="close"></div>
+                <figure id="big_image">
+                    <img id="big_img" src=""/>
+                </figure>
+                <div id="info_text">
+                    <h1 id="info_name">Nombre Cliente</h1>
+                    <h2 id="info_activ1"></h2>
+                    <h2 id="info_activ2">texto2</h2>
+                    <h2 id="info_activ3">texto3</h2>
+                </div>
+                <div id="info_circ"></div>
+                <div id="close"></div>
+                <div id="item1">
+                    <figure id="fig_item">
+                        <img id="icon1" src="">
+                    </figure>
+                    <div id="text_item1">
+                        <h1 id="acti_name1"></h1>
+                        <h2 id="acti_fecha1"></h2>
+                        <h2 id="acti_hora1"></h2>
+                    </div>
+                    <div id="close"></div>
+                </div>
+                <div id="item2">
+                    <figure id="fig_item">
+                        <img id="icon2" src="">
+                    </figure>
+                    <div id="text_item2">
+                        <h1 id="acti_name2"></h1>
+                        <h2 id="acti_fecha2"></h2>
+                        <h2 id="acti_hora2"></h2>
+                    </div>
+                    <div id="close"></div>
+                </div>
+                <div id="item3">
+                    <figure id="fig_item">
+                        <img id="icon3" src="">
+                    </figure>
+                    <div id="text_item1">
+                        <h1 id="acti_name3"></h1>
+                        <h2 id="acti_fecha3"></h2>
+                        <h2 id="acti_hora3"></h2>
+                    </div>
+                    <div id="close"></div>
+                </div>
+            </section>
+        </body>
+    </div>
+</html>
